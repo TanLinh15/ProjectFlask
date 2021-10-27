@@ -12,10 +12,10 @@ app.secret_key = 'cairocoders-ednalan'
 mysql = MySQL()
    
 # MySQL configurations
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = ''
-app.config['MYSQL_DATABASE_DB'] = 'mydb'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_USER'] = 'WBgiOehDRJ'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'NQfMa49wai'
+app.config['MYSQL_DATABASE_DB'] = 'WBgiOehDRJ'
+app.config['MYSQL_DATABASE_HOST'] = 'remotemysql.com'
 mysql.init_app(app)
  
 # http://localhost:5000/pythonlogin/ - this will be the login page
