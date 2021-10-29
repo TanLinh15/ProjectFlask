@@ -1,7 +1,7 @@
 
 .login-box{
     font-family: "Lato", sans-serif;
-    background: #ccc;
+    background: rgb(255, 255, 255);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -10,12 +10,9 @@
     color: white;
     }
     .login-body{
-      background: rgba(97, 97, 97, 0.507);
+      background: white;
       padding-left: 50px;
       padding-right: 50px;
     }
-    
 
-  element.style {
-      color: red;
-  }
+

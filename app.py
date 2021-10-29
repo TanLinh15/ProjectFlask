@@ -6,7 +6,7 @@ import re
  
 app = Flask(__name__)
  
-# Khóa bí mật 
+
 app.secret_key = '187IT20929'
  
 mysql = MySQL()
