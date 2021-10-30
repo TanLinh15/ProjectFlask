@@ -40,11 +40,24 @@
   display: block;
   position: absolute;
   width: 100%;
-  bottom:390px;
+  bottom:424px;
   left: 0;
   background-color: #57b846;
   padding-top: 50px;
   padding-bottom: 39px;
+}
+.form-control{
+  font-family: Ubuntu-Bold;
+    font-size: 15px;
+    color: #1b3815;
+    line-height: 1.2;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 55px;
+    background: #ebebeb;
+    border-radius: 27px;
+    padding: 0 35px;
 }
 .submit-button22{
   display: -webkit-box;
