@@ -4,7 +4,7 @@
  <head>
   <meta charset="utf-8">
   <title>Register</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="/static/register.css">
   <link rel="stylesheet" href="../static/css/style.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
   <!-- Google Fonts -->
@@ -14,8 +14,8 @@
  </head>
  <body style="background-color:#ccc;">
  <div class="container">
-   <div class="row main">
-    <div class="main-login main-center">
+   <div class="regis-box">
+    <div class="regis-body">
     <h5>Register New user or login existing account</h5>
      <form action="{{ url_for('register') }}" method="post" autocomplete="off"> 
       <div class="form-group">
