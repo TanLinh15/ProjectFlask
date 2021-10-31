@@ -6,73 +6,69 @@ import re
  
 app = Flask(__name__)
  
-# Change this to your secret key (can be anything, it's for extra protection)
-app.secret_key = 'cairocoders-ednalan'
+
+app.secret_key = '187IT20929'
  
 mysql = MySQL()
    
-# MySQL configurations
+# Connect Database
 app.config['MYSQL_DATABASE_USER'] = 'WBgiOehDRJ'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'NQfMa49wai'
 app.config['MYSQL_DATABASE_DB'] = 'WBgiOehDRJ'
 app.config['MYSQL_DATABASE_HOST'] = 'remotemysql.com'
 mysql.init_app(app)
  
-# http://localhost:5000/pythonlogin/ - this will be the login page
-@app.route('/pythonlogin/', methods=['GET', 'POST'])
+
+@app.route('/login/', methods=['GET', 'POST'])
 def login():
- # connect
+ # connect databse
     conn = mysql.connect()
     cursor = conn.cursor(pymysql.cursors.DictCursor)
   
-    # Output message if something goes wrong...
     msg = ''
-    # Check if "username" and "password" POST requests exist (user submitted form)
+    
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        # Create variables for easy access
+        # Tạo biến
         username = request.form['username']
         password = request.form['password']
-        # Check if account exists using MySQL
+        # Check account 
         cursor.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password))
-        # Fetch one record and return result
+        # Tìm và trả về 
         account = cursor.fetchone()
    
-    # If account exists in accounts table in out database
+    # Nếu tồn tại 
         if account:
-            # Create session data, we can access this data in other routes
             session['loggedin'] = True
             session['id'] = account['id']
             session['username'] = account['username']
-            # Redirect to home page
+            # Chuyển hướng đến trang chủ
             #return 'Logged in successfully!'
             return redirect(url_for('home'))
         else:
-            # Account doesnt exist or username/password incorrect
+            # Account không tồn tại 
             msg = 'Incorrect username/password!'
     
     return render_template('index.html', msg=msg)
  
-# http://localhost:5000/register - this will be the registration page
 @app.route('/register', methods=['GET', 'POST'])
 def register():
  # connect
     conn = mysql.connect()
     cursor = conn.cursor(pymysql.cursors.DictCursor)
   
-    # Output message if something goes wrong...
+    # Xuất ra thông báo nếu có sự cố
     msg = ''
-    # Check if "username", "password" and "email" POST requests exist (user submitted form)
+    # Kiểm tra xem các yêu cầu POST "tên người dùng", "mật khẩu" và "email" có tồn tại hay không
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
-        # Create variables for easy access
         fullname = request.form['fullname']
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
    
-  #Check if account exists using MySQL
+  #Kiểm tra account có tồn tại trong database không
         cursor.execute('SELECT * FROM accounts WHERE username = %s', (username))
         account = cursor.fetchone()
-        # If account exists show error and validation checks
+        # Nếu tài khoản tồn tại 
         if account:
             msg = 'Account already exists!'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
@@ -82,18 +78,18 @@ def register():
         elif not username or not password or not email:
             msg = 'Please fill out the form!'
         else:
-            # Account doesnt exists and the form data is valid, now insert new account into accounts table
+            # Nếu tài khoản không hợp lệ
             cursor.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s, %s)', (fullname, username, password, email)) 
             conn.commit()
    
             msg = 'You have successfully registered!'
     elif request.method == 'POST':
-        # Form is empty... (no POST data)
+        # Nếu để trống 
         msg = 'Please fill out the form!'
-    # Show registration form with message (if any)
+    # Hiển thị biểu mẫu đăng ký
     return render_template('register.html', msg=msg)
   
-# http://localhost:5000/home - this will be the home page, only accessible for loggedin users
+
 @app.route('/')
 def home():
     # Check if user is loggedin
@@ -104,7 +100,7 @@ def home():
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
   
-# http://localhost:5000/logout - this will be the logout page
+
 @app.route('/logout')
 def logout():
     # Remove session data, this will log the user out
@@ -114,7 +110,6 @@ def logout():
    # Redirect to login page
    return redirect(url_for('login'))
  
-# http://localhost:5000/profile - this will be the profile page, only accessible for loggedin users
 @app.route('/profile')
 def profile(): 
  # Check if account exists using MySQL
