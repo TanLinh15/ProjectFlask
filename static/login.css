@@ -9,7 +9,6 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding: 15px;
   position: relative;
   background-color: #fff;
 }
@@ -59,6 +58,10 @@
     border-radius: 27px;
     padding: 0 35px;
 }
+.input{
+  width: 100%;
+  background-color: #fff;
+}
 .submit-button22{
   display: -webkit-box;
     display: -webkit-flex;
@@ -83,12 +86,6 @@
     transition: all .4s;
     outline: none;
     border: none;
-}
-.input{
-  width: 100%;
-  background-color: #fff;
-  position: relative;
-  z-index: 1
 }
 .bottom-form{
   display: -webkit-box;
