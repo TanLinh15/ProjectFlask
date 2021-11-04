@@ -92,38 +92,29 @@ def register():
 
 @app.route('/')
 def home():
-    # Check if user is loggedin
     if 'loggedin' in session:
    
-        # User is loggedin show them the home page
         return render_template('home.html', username=session['username'])
-    # User is not loggedin redirect to login page
     return redirect(url_for('login'))
   
 
 @app.route('/logout')
 def logout():
-    # Remove session data, this will log the user out
    session.pop('loggedin', None)
    session.pop('id', None)
    session.pop('username', None)
-   # Redirect to login page
    return redirect(url_for('login'))
  
 @app.route('/news')
 def news(): 
- # Check if account exists using MySQL
+ 
     conn = mysql.connect()
     cursor = conn.cursor(pymysql.cursors.DictCursor)
   
-    # Check if user is loggedin
     if 'loggedin' in session:
-        # We need all the account info for the user so we can display it on the news page
         cursor.execute('SELECT * FROM accounts WHERE id = %s', [session['id']])
         account = cursor.fetchone()
-        # Show the news page with account info
         return render_template('news.html', account=account)
-    # User is not loggedin redirect to login page
     return redirect(url_for('login'))
   
   
